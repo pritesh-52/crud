@@ -1,0 +1,15 @@
+.container{
+    overflow: auto;
+}
+.left_view h3{
+    font-weight :bold;
+}
+.left_view p{
+    font-weight: 600;
+}
+.left_view span{
+    font-weight: 400;
+}
+.right{
+    margin-left: 350px;
+}
