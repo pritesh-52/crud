@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { NavLink, Link } from "react-router-dom";
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { updatedata } from './context/ContextProvider';
 
 const Edit = () => {
 
-    const histroy=useHistory();
+    const histroy = useHistory();
+    const {updata,setupdatedata}=useContext(updatedata);
+    
     const [inpval, setinpval] = useState({
         name: "",
         email: "",
@@ -45,6 +48,7 @@ const Edit = () => {
         }
         else {
             setinpval(data);
+    
             console.log("data added");
         }
     }
@@ -53,29 +57,28 @@ const Edit = () => {
         getData();
     }, [])
 
-    const Edidata=async(e)=>{
+    const Edidata = async (e) => {
         e.preventDefault();
-        const {name,email,age,mobile,work,address,desc}=inpval;
-        const res2=await fetch(`http://localhost:8000/edit/${id}`,{
-            method:"PATCH",
-            headers:{
+        const { name, email, age, mobile, work, address, desc } = inpval;
+        const res2 = await fetch(`http://localhost:8000/edit/${id}`, {
+            method: "PATCH",
+            headers: {
                 "Content-Type": "application/json"
             },
-            body:JSON.stringify({
-                name,email,age,mobile,work,address,desc
+            body: JSON.stringify({
+                name, email, age, mobile, work, address, desc
             })
 
         });
-        const data2=await res2.json();
+        const data2 = await res2.json();
         console.log(data2)
 
-        if(res2.staus===404 || !data2)
-        {
+        if (res2.staus === 404 || !data2) {
             alert("All File Require");
             console.log("error");
         }
-        else{
-            alert("Data Updated");
+        else {
+            setupdatedata(data2);
             console.log("Add");
             histroy.push("/");
         }
@@ -119,7 +122,7 @@ const Edit = () => {
                             <textarea type="" name="desc" value={inpval.desc} class="form-control" id="exampleInputPassword1" rows="5" cols="5" onChange={setdata} />
                         </div>
 
-                        <button type="submit"  onClick={Edidata} class="btn btn-primary">Submit</button>
+                        <button type="submit" onClick={Edidata} class="btn btn-primary">Submit</button>
                     </div>
                 </form>
             </div>

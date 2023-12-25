@@ -12,10 +12,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import "../index.css";
 import { useParams } from 'react-router-dom/cjs/react-router-dom';
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
+import {useHistory} from "react-router-dom";
 const Details = () => {
 
     const {id}=useParams("");
     console.log(id);
+    const histroy=useHistory();
 
     const [getuser, setuser] = useState([]);
     console.log(getuser);
@@ -42,7 +44,28 @@ const Details = () => {
 
     useEffect(() => {
         getData();
-    }, [])
+    }, []);
+
+    const Deletedata=async()=>{
+        const res2 = await fetch(`http://localhost:8000/delete/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        const data2 = await res2.json();
+        console.log(data2);
+
+        if (res2.status === 404 || !data2) {
+            console.log("error");
+        }
+        else {
+            alert("Delete Data");
+            histroy.push("/");
+        }
+
+
+    }
 
     return (
         <div className='container mt-3'>
@@ -51,8 +74,9 @@ const Details = () => {
             <Card sx={{ maxWidth: 600 }}>
                 <CardContent>
                     <div className="right">
-                       <NavLink to={`edit/${id}`}><button type="button" class="btn btn-warning"><CreateIcon /></button></NavLink>  
-                        <button type="button" class="btn btn-danger"><DeleteIcon /></button>
+                       <NavLink to={`/edit/${id}`}><button class="btn btn-warning"><CreateIcon /></button></NavLink>  
+                       &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" onClick={()=>Deletedata(getuser._id)}><DeleteIcon /></button>
                     </div>
                     <div className='row'>
                         <div className="left_view  col-lg-6 col-md-6 col-12">

@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { NavLink, Link } from "react-router-dom";
 import {useHistory} from "react-router-dom";
+import { adddata } from './context/ContextProvider';
 
 
 const Register = () => {
+    const { udata, setudata } = useContext(adddata);
+
 
     
     const [inpval, setinpval] = useState({
@@ -47,7 +50,7 @@ const Register = () => {
             console.log("error");
         }
         else {
-            alert("data added");
+            setudata(data);
             console.log("data added");
             histroy.push("/");
         }
@@ -89,7 +92,7 @@ const Register = () => {
                             <textarea type="" name="desc" value={inpval.desc} class="form-control" id="exampleInputPassword1" rows="5" cols="5" onChange={setdata} />
                         </div>
 
-                        <button type="submit" onClick={addData} class="btn btn-primary">Submit</button>
+                        <button type="submit" onClick={addData} class="btn btn-primary ">Submit</button>
                     </div>
                 </form>
             </div>
