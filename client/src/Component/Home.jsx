@@ -5,6 +5,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import "../index.css";
 import { NavLink } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Home = () => {
 
@@ -34,6 +35,27 @@ const Home = () => {
     useEffect(() => {
         getData();
     }, []);
+
+    const Deletedata = async (id) => {
+
+        const res2 = await fetch(`http://localhost:8000/delete/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        const data2 = await res2.json();
+        console.log(data2);
+
+        if (res2.status === 404 || !data2) {
+            console.log("error");
+        }
+        else {
+            alert("Delete Data");
+            getData();
+        }
+
+    }
 
     return (
         <>
@@ -68,7 +90,7 @@ const Home = () => {
                                                     <td className="d-flex justify-content-between">
                                                         <NavLink to={`view/${element._id}`}><button type="button" class="btn btn-success"><RemoveRedEyeIcon /></button></NavLink>
                                                         <NavLink to={`edit/${element._id}`}> <button type="button" class="btn btn-warning"><CreateIcon /></button></NavLink>
-                                                        <button type="button" class="btn btn-danger"><DeleteIcon /></button>
+                                                        <button type="button" onClick={() => Deletedata(element._id)} class="btn btn-danger"><DeleteIcon /></button>
                                                     </td>
                                                 </tr>
                                             </>

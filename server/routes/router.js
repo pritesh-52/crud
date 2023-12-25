@@ -67,7 +67,11 @@ router.get("/getuser/:id", async (req, res) => {
 router.patch("/edit/:id",async(req,res)=>{
     try
     {
-
+        const _id=req.params.id;
+        const editdata=await user.findByIdAndUpdate(_id,req.body,{
+            new:true
+        });
+        res.status(200).send(editdata);
     }
     catch(e)
     {
@@ -75,5 +79,21 @@ router.patch("/edit/:id",async(req,res)=>{
     }
 
 })
+
+/* Delete Data */
+ router.delete("/delete/:id",async(req,res)=>{
+    try
+    {   
+        const _id=req.params.id;
+        const deletedata=await user.findByIdAndDelete(_id);
+        res.status(200).send(deletedata);
+
+    }
+    catch(e)
+    {
+        res.status(404).send(e);
+    }
+
+ })
 
 module.exports = router;

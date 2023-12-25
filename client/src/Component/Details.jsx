@@ -11,6 +11,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import "../index.css";
 import { useParams } from 'react-router-dom/cjs/react-router-dom';
+import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 const Details = () => {
 
     const {id}=useParams("");
@@ -50,7 +51,7 @@ const Details = () => {
             <Card sx={{ maxWidth: 600 }}>
                 <CardContent>
                     <div className="right">
-                        <button type="button" class="btn btn-warning"><CreateIcon /></button>
+                       <NavLink to={`edit/${id}`}><button type="button" class="btn btn-warning"><CreateIcon /></button></NavLink>  
                         <button type="button" class="btn btn-danger"><DeleteIcon /></button>
                     </div>
                     <div className='row'>
