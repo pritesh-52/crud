@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState,useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import profile from "../profile.png";
@@ -9,7 +10,39 @@ import PlaceIcon from '@mui/icons-material/Place';
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import "../index.css";
+import { useParams } from 'react-router-dom/cjs/react-router-dom';
 const Details = () => {
+
+    const {id}=useParams("");
+    console.log(id);
+
+    const [getuser, setuser] = useState([]);
+    console.log(getuser);
+
+    const getData = async (e) => {
+        const res = await fetch(`http://localhost:8000/getuser/${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+        });
+        const data = await res.json();
+        console.log(data);
+
+        if (res.status === 404 || !data) {
+            console.log("error");
+        }
+        else {
+            setuser(data);
+            console.log("data added");
+        }
+    }
+
+    useEffect(() => {
+        getData();
+    }, [])
+
     return (
         <div className='container mt-3'>
             <h1>Welcome Pritesh</h1>
@@ -23,16 +56,16 @@ const Details = () => {
                     <div className='row'>
                         <div className="left_view  col-lg-6 col-md-6 col-12">
                             <img src={profile} style={{ width: 50 }} alt="" />
-                            <h3 className='mt-3'>Name :<span >Pritesh</span></h3>
-                            <h3 className='mt-3'>Age: <span >22</span></h3>
-                            <p className='mt-3'><MailIcon />Email : <span >pritesh@gmail.com</span></p>
-                            <p className='mt-3'><WorkIcon />Occupation : <span>Web Developer</span></p>
+                            <h3 className='mt-3'>Name :<span >{getuser.name}</span></h3>
+                            <h3 className='mt-3'>Age: <span >{getuser.age}</span></h3>
+                            <p className='mt-3'><MailIcon />Email : <span >{getuser.email}</span></p>
+                            <p className='mt-3'><WorkIcon />Occupation : <span>{getuser.work}</span></p>
                         </div>
                         <div className="right_view col-lg-6 col-md-6 col-12">
 
-                            <p className='mt-5'><PhoneAndroidIcon />Mobile: <span>+91 9033174261</span></p>
-                            <p className='mt-3'><PlaceIcon />Location : <span>Amd 380006</span></p>
-                            <p className='mt-3'>Description : <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic modi</span></p>
+                            <p className='mt-5'><PhoneAndroidIcon />Mobile: <span>{getuser.mobile}</span></p>
+                            <p className='mt-3'><PlaceIcon />Location : <span>{getuser.address}</span></p>
+                            <p className='mt-3'>Description : <span>{getuser.desc}</span></p>
                         </div>
 
 

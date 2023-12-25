@@ -60,14 +60,14 @@ const Home = () => {
                                         return (
                                             <>
                                                 <tr>
-                                                    <th scope="row">{id+1}</th>
+                                                    <th scope="row">{id + 1}</th>
                                                     <td>{element.name}</td>
                                                     <td>{element.email}</td>
                                                     <td>{element.work}</td>
                                                     <td>{element.mobile}</td>
                                                     <td className="d-flex justify-content-between">
-                                                        <button type="button" class="btn btn-success"><RemoveRedEyeIcon /></button>
-                                                        <button type="button" class="btn btn-warning"><CreateIcon /></button>
+                                                        <NavLink to={`view/${element._id}`}><button type="button" class="btn btn-success"><RemoveRedEyeIcon /></button></NavLink>
+                                                        <NavLink to={`edit/${element._id}`}> <button type="button" class="btn btn-warning"><CreateIcon /></button></NavLink>
                                                         <button type="button" class="btn btn-danger"><DeleteIcon /></button>
                                                     </td>
                                                 </tr>
