@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import { adddata } from "./context/ContextProvider";
 import { updatedata } from "./context/ContextProvider";
 import { deletedata } from "./context/ContextProvider";
+import Navbar from "./Navbar";
 
 
 const Home = () => {
@@ -69,6 +70,7 @@ const Home = () => {
 
     return (
         <>
+        <Navbar></Navbar>
             {
                 udata ?
                     <>

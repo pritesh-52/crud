@@ -2,12 +2,11 @@ import React, { useContext, useState } from 'react'
 import { NavLink, Link } from "react-router-dom";
 import {useHistory} from "react-router-dom";
 import { adddata } from './context/ContextProvider';
+import Navbar from './Navbar';
 
 
 const Register = () => {
     const { udata, setudata } = useContext(adddata);
-
-
     
     const [inpval, setinpval] = useState({
         name: "",
@@ -52,10 +51,12 @@ const Register = () => {
         else {
             setudata(data);
             console.log("data added");
-            histroy.push("/");
+            histroy.push("/home");
         }
     }
     return (
+        <>
+        <Navbar></Navbar>
         <div className='container'>
             <div className="mt-3 fs-5">
                 <NavLink exact to="/" >Home</NavLink>
@@ -97,6 +98,7 @@ const Register = () => {
                 </form>
             </div>
         </div>
+    </>
 
 
     )

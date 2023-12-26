@@ -3,6 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { useHistory } from "react-router-dom";
 import { updatedata } from './context/ContextProvider';
+import Navbar from './Navbar';
 
 const Edit = () => {
 
@@ -80,12 +81,14 @@ const Edit = () => {
         else {
             setupdatedata(data2);
             console.log("Add");
-            histroy.push("/");
+            histroy.push("/home");
         }
 
 
     }
     return (
+        <>
+        <Navbar></Navbar>
         <div className='container'>
             <div className="mt-3 fs-5">
                 <NavLink exact to="/" >Home</NavLink>
@@ -127,7 +130,7 @@ const Edit = () => {
                 </form>
             </div>
         </div>
-
+</>
 
     )
 }

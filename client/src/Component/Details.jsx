@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState,useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -13,6 +13,8 @@ import "../index.css";
 import { useParams } from 'react-router-dom/cjs/react-router-dom';
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import {useHistory} from "react-router-dom";
+import { deletedata } from './context/ContextProvider';
+import Navbar from './Navbar';
 const Details = () => {
 
     const {id}=useParams("");
@@ -20,6 +22,8 @@ const Details = () => {
     const histroy=useHistory();
 
     const [getuser, setuser] = useState([]);
+    const {ddata, setdeletedata} = useContext(deletedata);
+    
     console.log(getuser);
 
     const getData = async (e) => {
@@ -60,14 +64,16 @@ const Details = () => {
             console.log("error");
         }
         else {
-            alert("Delete Data");
-            histroy.push("/");
+            setdeletedata(data2);
+            histroy.push("/home");
         }
 
 
     }
 
     return (
+        <>
+        <Navbar></Navbar>
         <div className='container mt-3'>
             <h1>Welcome Pritesh</h1>
 
@@ -100,6 +106,7 @@ const Details = () => {
                 </CardContent>
             </Card>
         </div>
+    </>
     )
 }
 
