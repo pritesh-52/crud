@@ -27,7 +27,7 @@ const Details = () => {
     console.log(getuser);
 
     const getData = async (e) => {
-        const res = await fetch(`http://localhost:8000/getuser/${id}`, {
+        const res = await fetch(`https://mernappbackend-y4vu.onrender.com/getuser/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -51,7 +51,7 @@ const Details = () => {
     }, []);
 
     const Deletedata=async()=>{
-        const res2 = await fetch(`http://localhost:8000/delete/${id}`, {
+        const res2 = await fetch(`https://mernappbackend-y4vu.onrender.com/delete/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"

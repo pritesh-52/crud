@@ -34,7 +34,7 @@ const Edit = () => {
     console.log(id);
 
     const getData = async (e) => {
-        const res = await fetch(`http://localhost:8000/getuser/${id}`, {
+        const res = await fetch(`https://mernappbackend-y4vu.onrender.com/getuser/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -61,7 +61,7 @@ const Edit = () => {
     const Edidata = async (e) => {
         e.preventDefault();
         const { name, email, age, mobile, work, address, desc } = inpval;
-        const res2 = await fetch(`http://localhost:8000/edit/${id}`, {
+        const res2 = await fetch(`https://mernappbackend-y4vu.onrender.com/edit/${id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"

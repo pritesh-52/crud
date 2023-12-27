@@ -32,7 +32,7 @@ const Register = () => {
     const addData = async (e) => {
         e.preventDefault();
         const { name, email, age, mobile, work, address, desc } = inpval;
-        const res = await fetch("http://localhost:8000/register", {
+        const res = await fetch("https://mernappbackend-y4vu.onrender.com/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
